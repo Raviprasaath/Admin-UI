@@ -56,31 +56,31 @@ const TableBody = ( {check} ) => {
   }, [dataDisplay])
 
   useEffect(()=> {
-    if (searchResult.length === 0) {
+    if (searchValue.length === 0) {
       setPageStart((currentPage*10) - 10);
-      setPageEnd(currentPage*10)
+      setPageEnd(currentPage*10);
     } else {
       setPageStart(0);
-      setPageEnd(searchResult.length % 10);
+      setPageEnd(searchValue.length % 10);
     }
-  }, [currentPage, searchResult])
+  }, [currentPage, searchValue])
 
   useEffect(()=> {
     if (check) {
       const temp = [];
-      if (searchResult.length === 0) {
-        for (let i=pageStart; i<10; i++) {
+      if (searchValue.length === 0) {
+        for (let i=pageStart; i<pageStart+10; i++) {
           temp.push(i+1);
         }
       } else {
-        for (let i=pageStart; i<searchResult.length; i++) {
+        for (let i=pageStart; i<searchValue.length; i++) {
           temp.push(i+1);
         }
       }
       const temp2 = dataDisplay.filter((item, index) => {
         return !temp.includes(index + 1);
       });
-
+      
       setDataDisplay(temp2);
       setSearchResult(temp2);
       
@@ -143,7 +143,7 @@ const TableBody = ( {check} ) => {
     );
   }
 
-  if (dataDisplay.length === 0) {
+  if (dataDisplay.length === 0 ) {
     return (
       <>
         <tr>
